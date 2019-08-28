@@ -9,6 +9,7 @@ try:
     for scan in root.RESPONSE.SCAN_LIST.SCAN:
         print(f'Canceling {scan.TITLE.text}: {scan.REF.text}...')
         response = q.request('/api/2.0/fo/scan/',{'action': 'cancel','scan_ref': scan.REF.text})
-        print(response)
+        if '<TEXT>Canceling scan</TEXT>' in response:
+            print('Successfully canceled scan.')
 except AttributeError:
-    print('No scans running')
+    print('No scans running.')
